@@ -1,5 +1,5 @@
-# 使用官方Node.js镜像
-FROM node:18-alpine
+# 使用官方Node.js 20镜像
+FROM node:20-alpine
 
 # 设置工作目录
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # 安装依赖
-RUN npm ci --only=production
+RUN npm ci --only=production --no-audit --no-fund
 
 # 复制源代码
 COPY . .
@@ -31,4 +31,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # 启动应用
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
